@@ -1,0 +1,131 @@
+1.UI BUGS***************************************************************************************************************
+
+a.
+Descriptions:
+When user navigate to table where all employee located, after user provide first Name and last Name
+User will see provided firstName in the "last Name" column, and  provided lastName in the "first Name" column.
+
+Step to reproduce:
+1.Login to website(https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/Login),
+(Credential: userName=TestUser68, password=[9/tslMpOCR/)
+2.Click on the "add Employee" Button-> provide  letters first name and last name->click "Add"
+3.Check "First Name" and "last Name" column.
+
+Expected Result:
+1.First name should be in "First Name" column.
+2.Last name should be in "Last Name" column.
+
+Actual Result:
+1.Provided First name in "Last Name" column.
+2 Provided Last name should be in "First Name" column.
+
+
+b.
+Descriptions:
+When user provide numbers inside first name and last name fields it accept,
+and after user click on "add" button , can see only numbers instead of first name
+and last name.
+
+Step to reproduce:
+1.Login to website(https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/Account/Login),
+(Credential: userName=TestUser68, password=[9/tslMpOCR/)
+2.Click on the "add Employee" Button-> provide numbers for  first name and last name->click "Add"
+3.Check "First Name" and "last Name" column.
+
+Expected Result:
+1.First name should contain only letter .
+2.Last name should contain only letter.
+
+Actual Result:
+1.Provided First name does not contain letter.
+2 Provided Last name does not contain letter.
+
+c.
+Descriptions:
+  When user provide numbers inside first name and last name fields it accept,
+  and after user click on "add" button , can see only numbers instead of first name
+  and last name.
+
+d.
+Descriptions:
+When user provide the identically first name and last name , dependents multiply times,
+the table accept all this duplicates data.
+
+e.
+Descriptions:
+When user create and add new employee into the table , the data will be added randomly
+(doesn't has sort method ).
+ .
+
+
+2.API BUGS**************************************************************************************************************
+
+
+a.
+Descriptions:
+When user put data inside body using "POST" operation , user can put any data,
+and operation still will be successful.
+
+Step to reproduce:
+1.Create request inside collection
+2.Choose "POST" operation
+3.Provide endpoint to your request (https://wmxrwq14uc.execute-api.us-east-1.amazonaws.com/Prod/api/employees),
+4.Go Authorization->Type->Basic Auth->provide(Credential: userName=TestUser68, password=[9/tslMpOCR/)
+5.Go to Header->Provide(key=Content-Type,value=application/json),provide(key=Authorization,value=VGVzdFVzZXI2ODpbOS90c2xNcE9DUi8=).
+6.Go to body->raw->provide ({
+                                "firstName": "Sergii",
+                                "lastName": "Ostapchuk",
+                                "dependants": 1,
+                                "phone":32456632
+                            })
+7.Click on Send it
+
+Expected Result:
+1.User should got status code 400 "Bad request" .
+
+Actual Result:
+1.User got status code 200 "OK"
+
+
+b.
+Descriptions:
+When user put data inside body using "PUT" operation , user can put digits in Name field,
+and operation still will be successful.
+
+Expected Result:
+1.User should got status code 400 "Bad request" .
+
+Actual Result:
+1.User got status code 200 "OK"
+
+c.
+Descriptions:
+When user use PUT operation trough Rest the response give 415status code .
+
+Expected Result:
+1.User should got status code 200 "OK" .
+
+Actual Result:
+1.User got status code 415 "Unsupported Media Type"
+
+d.
+Descriptions:
+  When user use PUT request trough Postman the response give wrong data .
+  The salary and gross equals zero.Math operation to calculate benefits doing wrong
+
+Expected Result:
+  1.User should got salary=52000, gross=2000  .
+
+Actual Result:
+  1.User should got salary=0, gross=0
+
+e.
+Descriptions:
+When user use PUT request Content Length equals zero .
+
+
+Expected Result:
+1.Content Length should be more than zero  .
+
+Actual Result:
+1.Content Length equals zero
